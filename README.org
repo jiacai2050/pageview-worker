@@ -14,18 +14,18 @@ Live demo:
 - https://liujiacai.net/pageview-worker
 
 There are two pages containing [[file:demo.js][tracking JS code]] for this live demo:
-- [[http://liujiacai.net/pageview-worker/demo1.html][Demo 1]]
-- [[http://liujiacai.net/pageview-worker/demo2.html][Demo 2]]
+- [[https://liujiacai.net/pageview-worker/demo1.html][Demo 1]]
+- [[https://liujiacai.net/pageview-worker/demo2.html][Demo 2]]
 
 #+begin_quote
-⚠️ Those two demo pages will collect your IP/Country/City, use at your own risk.
+⚠️ Demo pages will collect your IP/Country/City, click at your own risk.
 #+end_quote
 * Use at you own website
-- Setup workers, refer to [[https://developers.cloudflare.com/workers/get-started/quickstarts/][Quickstarts · Cloudflare Workers docs]]
+- Setup workers, refer to [[https://developers.cloudflare.com/workers/get-started/quickstarts/][quickstarts]]
   - Publish [[file:worker.js]]
 - Add KV binding, refer to [[https://developers.cloudflare.com/workers/runtime-apis/kv/][Referencing KV from Workers]]
   - Binding name is =KV= in this project.
-- Add following tracking code to HTML files you want to monitor, replace =apiEndpoint= with your worker address.
+- Add following tracking code to HTML files you want to track, replace =apiEndpoint= with your worker address.
   #+begin_src js
 const apiEndpoint = 'https://pageview-demo.jiacai2050.workers.dev/write';
 const payload = {
@@ -36,7 +36,7 @@ const payload = {
 fetch(`${apiEndpoint}?${new URLSearchParams(payload)}`, {mode: 'no-cors'})
   .catch(console.log);
   #+end_src
-- Then when visit HTML, following information will be saved KV via workers:
+- Then when visit HTML, following information will be saved to KV via workers:
   - URL
   - Title
   - Referrer

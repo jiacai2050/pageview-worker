@@ -71,7 +71,7 @@ async function write(req, env, searchParams) {
   const now = new Date().getTime();
   const key = Number.MAX_SAFE_INTEGER - now;
   await env['KV'].put(String(key), '', {
-    expirationTtl: 3600 * 24 * 30, // 30 days
+    expirationTtl: 3600 * 24 * 300, // 300 days
     metadata: {
       url: url,
       title: title,

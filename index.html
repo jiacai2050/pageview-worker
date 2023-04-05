@@ -33,7 +33,6 @@
 <th>Referrer</th>
 </tr>`];
 
-        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         let addClass = true;
         for(const v of value['keys']) {
           const time = v['time'];
@@ -63,7 +62,7 @@
           const referrerLabel = referrer.substring(0, 35);
           addClass = !addClass;
           rows.push(
-            `<td>${new Date(time).toLocaleString('en-GB', {timeZone: timeZone})}</td>
+            `<td>${new Date(time).toLocaleString('en-GB')}</td>
              <td><a href="${url}">${title}</a></td>
              <td>${location}</td>
              <td>${ip}</td>
@@ -83,6 +82,14 @@
     </table>
     <footer>
       <p>Author: <a href="mailto:dev@liujiacai.net">Jiacai Liu</a>. Powered by <a href="https://github.com/jiacai2050/pageview-worker/">Pageview Worker.</a></p>
+      <p>
+        <a href="demo1.html">Demo 1</a>
+        <a href="demo2.html">Demo 2</a>
+      </p>
+      <p>
+        ⚠️ Demo pages will collect your IP/Country/City, click at your own risk.
+      </p>
+
     </footer>
   </body>
 </html>
