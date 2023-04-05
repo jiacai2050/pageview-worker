@@ -8,9 +8,12 @@
 
 Page View backend based on [[https://developers.cloudflare.com/workers/][Cloudflare Workers]] and [[https://developers.cloudflare.com/workers/runtime-apis/kv/][KV]].
 
-[[file:pageview.webp]]
+[[file:pageview.jpg]]
 
-* Usage
+Live demo:
+- https://liujiacai.net/pageview-worker
+
+* Use at you own site
 - Setup workers, refer to [[https://developers.cloudflare.com/workers/get-started/quickstarts/][Quickstarts · Cloudflare Workers docs]]
   - Publish [[file:worker.js]]
 - Add KV binding, refer to [[https://developers.cloudflare.com/workers/runtime-apis/kv/][Referencing KV from Workers]]
@@ -22,8 +25,7 @@ const payload = {
   'title': document.title,
   'referrer': window.frames.top.document.referrer,
 };
-fetch(`${apiEndpoint}?${new URLSearchParams(payload)}`,
-      {mode: 'no-cors'})
+fetch(`${apiEndpoint}?${new URLSearchParams(payload)}`, {mode: 'no-cors'})
   .catch(console.log);
   #+end_src
 - Then when visit HTML, following information will be saved KV via workers:
@@ -34,3 +36,8 @@ fetch(`${apiEndpoint}?${new URLSearchParams(payload)}`,
   - ip
   - country
   - city
+
+* Other fun workers project
+- [[https://github.com/eidam/cf-workers-status-page][Monitor your websites, showcase status including daily history, and get Slack notification whenever your website status changes.]]
+* License
+[[file:LICENSE][GPL-3]]
