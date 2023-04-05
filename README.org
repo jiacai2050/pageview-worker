@@ -13,11 +13,19 @@ Page View backend based on [[https://developers.cloudflare.com/workers/][Cloudfl
 Live demo:
 - https://liujiacai.net/pageview-worker
 
-* Use at you own site
+There are two pages containing [[file:demo.js][tracking JS code]] for this live demo:
+- [[http://liujiacai.net/pageview-worker/demo1.html][Demo 1]]
+- [[http://liujiacai.net/pageview-worker/demo2.html][Demo 2]]
+
+#+begin_quote
+⚠️ Those two demo pages will collect your IP/Country/City, use at your own risk.
+#+end_quote
+* Use at you own website
 - Setup workers, refer to [[https://developers.cloudflare.com/workers/get-started/quickstarts/][Quickstarts · Cloudflare Workers docs]]
   - Publish [[file:worker.js]]
 - Add KV binding, refer to [[https://developers.cloudflare.com/workers/runtime-apis/kv/][Referencing KV from Workers]]
-- Add following script to HTML files, replace =apiEndpoint= with your worker.
+  - Binding name is =KV= in this project.
+- Add following tracking code to HTML files you want to monitor, replace =apiEndpoint= with your worker address.
   #+begin_src js
 const apiEndpoint = 'https://pageview-demo.jiacai2050.workers.dev/write';
 const payload = {
@@ -29,13 +37,15 @@ fetch(`${apiEndpoint}?${new URLSearchParams(payload)}`, {mode: 'no-cors'})
   .catch(console.log);
   #+end_src
 - Then when visit HTML, following information will be saved KV via workers:
-  - url
-  - title
-  - referrer
-  - ua
-  - ip
-  - country
-  - city
+  - URL
+  - Title
+  - Referrer
+  - User-Agent
+  - IP
+  - Country
+  - City
+- [[file:index.html]] is provided to view saved pageviews.
+  - Replace =apiEndpoint= with your worker address.
 
 * Other fun workers project
 - [[https://github.com/eidam/cf-workers-status-page][Monitor your websites, showcase status including daily history, and get Slack notification whenever your website status changes.]]

@@ -1,7 +1,6 @@
 export default {
   async fetch(req, env, ctx) {
     try {
-      console.log(JSON.stringify([...req.headers]));
       const { pathname, searchParams } = new URL(req.url);
       switch (pathname) {
       case "/write":
@@ -18,6 +17,7 @@ export default {
       }
     } catch (err) {
       console.error(err.message, err.name);
+      console.log(JSON.stringify([...req.headers]));
       console.log(JSON.stringify(req));
       return new Response(`<h1>${err.message}</h1>`, {
         status: 500,
