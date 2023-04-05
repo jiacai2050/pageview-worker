@@ -1,0 +1,8 @@
+name = "pageview-demo"
+main = "worker.js"
+compatibility_date = "2023-04-03"
+
+kv_namespaces = [
+  # preview_id is used for testing, and should be different in practial usage.
+  { binding = "KV", id = "71e4943c028243c7814a5f6317c55575", preview_id = "71e4943c028243c7814a5f6317c55575" },
+]

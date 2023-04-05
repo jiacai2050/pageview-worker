@@ -1,0 +1,36 @@
+#+TITLE: Pageview Worker
+#+DATE: 2023-04-05T15:09:21+0800
+#+LASTMOD: 2023-04-05T15:09:21+0800
+#+AUTHOR: Jiacai Liu
+#+EMAIL: blog@liujiacai.net
+#+OPTIONS: toc:nil num:nil
+#+STARTUP: content
+
+Page View backend based on [[https://developers.cloudflare.com/workers/][Cloudflare Workers]] and [[https://developers.cloudflare.com/workers/runtime-apis/kv/][KV]].
+
+[[file:pageview.webp]]
+
+* Usage
+- Setup workers, refer to [[https://developers.cloudflare.com/workers/get-started/quickstarts/][Quickstarts · Cloudflare Workers docs]]
+  - Publish [[file:worker.js]]
+- Add KV binding, refer to [[https://developers.cloudflare.com/workers/runtime-apis/kv/][Referencing KV from Workers]]
+- Add following script to HTML files, replace =apiEndpoint= with your worker.
+  #+begin_src js
+const apiEndpoint = 'https://pageview-demo.jiacai2050.workers.dev/write';
+const payload = {
+  'url': document.location.href,
+  'title': document.title,
+  'referrer': window.frames.top.document.referrer,
+};
+fetch(`${apiEndpoint}?${new URLSearchParams(payload)}`,
+      {mode: 'no-cors'})
+  .catch(console.log);
+  #+end_src
+- Then when visit HTML, following information will be saved KV via workers:
+  - url
+  - title
+  - referrer
+  - ua
+  - ip
+  - country
+  - city

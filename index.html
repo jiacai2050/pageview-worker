@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Page Views</title>
+    <meta name="description" content="Page views powered by cloudflare workers">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jiacai Liu">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" >
+    <style>
+      h1, footer {
+          text-align: center;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <script>
+      const apiEndpoint = 'https://pageview-demo.jiacai2050.workers.dev/read';
+      async function render() {
+        const resp = await fetch(apiEndpoint, {mode: 'cors'});
+        const value = await resp.json();
+        console.log(resp);
+
+        let rows = [`<tr>
+<th>Time</th>
+<th>Title</th>
+<th>Location</th>
+<th>IP</th>
+<th>UA</th>
+<th>Referrer</th>
+</tr>`];
+
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        let addClass = true;
+        for(const v of value['keys']) {
+          const time = v['time'];
+          const url = v['metadata']['url'];
+          const title = v['metadata']['title'];
+          const ua = v['metadata']['ua'];
+          const ip = v['metadata']['ip'];
+          const city = v['metadata']['city'];
+          const country = v['metadata']['country'];
+          const referrer = v['metadata']['referrer'] || '';
+
+          let location = '';
+          let hasCity = false;
+          if(city) {
+            location += city;
+            hasCity = true;
+          }
+          if(country) {
+            if (hasCity) location += ', ';
+            location += country;
+          }
+          if(addClass) {
+            rows.push(`<tr class="pure-table-odd">`);
+          } else {
+            rows.push(`<tr>`);
+          }
+          const referrerLabel = referrer.substring(0, 35);
+          addClass = !addClass;
+          rows.push(
+            `<td>${new Date(time).toLocaleString('en-GB', {timeZone: timeZone})}</td>
+             <td><a href="${url}">${title}</a></td>
+             <td>${location}</td>
+             <td>${ip}</td>
+             <td>${ua}</td>
+             <td><a href="${referrer}">${referrerLabel}</a></td>
+             </tr>`);
+        }
+        document.getElementById('count').innerHTML = value['keys'].length;
+        document.getElementById('app').innerHTML = rows.join('');
+      }
+
+      window.onload = render;
+
+      </script>
+    <h1><span id="count"></span> Page Views</h1>
+    <table class="pure-table pure-table-bordered" id="app">
+    </table>
+    <footer>
+      <p>Author: <a href="mailto:dev@liujiacai.net">Jiacai Liu</a>. Powered by <a href="https://developers.cloudflare.com/workers/">Cloudflare Workers.</a></p>
+    </footer>
+  </body>
+</html>
