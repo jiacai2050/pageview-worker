@@ -13,7 +13,7 @@ Page View backend based on [[https://developers.cloudflare.com/workers/][Cloudfl
 Live demo:
 - https://liujiacai.net/pageview-worker
 
-There are two pages containing [[file:demo.js][tracking JS code]] for this live demo:
+There are two pages containing [[file:demo/tracking.js]] for this live demo:
 - [[https://liujiacai.net/pageview-worker/demo1.html][Demo 1]]
 - [[https://liujiacai.net/pageview-worker/demo2.html][Demo 2]]
 
@@ -23,7 +23,7 @@ There are two pages containing [[file:demo.js][tracking JS code]] for this live 
 * Use at you own website
 - Setup workers, refer to [[https://developers.cloudflare.com/workers/get-started/quickstarts/][quickstarts]]
   - Publish [[file:worker.js]]
-- Add KV binding, refer to [[https://developers.cloudflare.com/workers/runtime-apis/kv/][Referencing KV from Workers]]
+- Add KV binding, refer to [[https://developers.cloudflare.com/workers/runtime-apis/kv/][referencing KV from Workers]]
   - Binding name is =KV= in this project.
 - Add following tracking code to HTML files you want to track, replace =apiEndpoint= with your worker address.
   #+begin_src js
@@ -44,10 +44,12 @@ fetch(`${apiEndpoint}?${new URLSearchParams(payload)}`, {mode: 'no-cors'})
   - IP
   - Country
   - City
-- [[file:index.html]] is provided to view saved pageviews.
+- [[file:demo/index.html]] is provided to view saved pageviews.
   - Replace =apiEndpoint= with your worker address.
 
 * Other fun workers project
-- [[https://github.com/eidam/cf-workers-status-page][Monitor your websites, showcase status including daily history, and get Slack notification whenever your website status changes.]]
+- [[https://github.com/eidam/cf-workers-status-page][Status page]]
+- [[https://github.com/honojs/hono][honojs/hono: Ultrafast web framework for the Edges]]
+- [[https://github.com/cloudflare/miniflare][cloudflare/miniflare: Fully-local simulator for Cloudflare Workers]]
 * License
 [[file:LICENSE][GPL-3]]

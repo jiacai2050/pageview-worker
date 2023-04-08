@@ -5,5 +5,5 @@ pub:
 dev:
 	npx wrangler dev
 
-preview:
-	python -m http.server
+serve:
+	cd demo && python -m http.server
