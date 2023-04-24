@@ -2,7 +2,6 @@
 #+DATE: 2023-04-05T15:09:21+0800
 #+LASTMOD: 2023-04-05T15:09:21+0800
 #+AUTHOR: Jiacai Liu
-#+EMAIL: blog@liujiacai.net
 #+OPTIONS: toc:nil num:nil
 #+STARTUP: content
 
@@ -11,11 +10,11 @@ Page View backend based on [[https://developers.cloudflare.com/workers/][Cloudfl
 [[file:pageview.jpg]]
 
 Live demo:
-- https://liujiacai.net/pageview-worker
+- https://jiacai2050.github.io/pageview-worker
 
 There are two pages containing [[file:demo/tracking.js]] for this live demo:
-- [[https://liujiacai.net/pageview-worker/demo1.html][Demo 1]]
-- [[https://liujiacai.net/pageview-worker/demo2.html][Demo 2]]
+- [[https://jiacai2050.github.io/pageview-worker/demo1.html][Demo 1]]
+- [[https://jiacai2050.github.io/pageview-worker/demo2.html][Demo 2]]
 
 #+begin_quote
 ⚠️ Demo pages will collect your IP/Country/City, click at your own risk.
